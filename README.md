@@ -1,41 +1,43 @@
-# Ember Studio
+# Ember Studio — The Living Studio
 
-A static official studio website, following the [Northern Ledger handoff](docs/EMBER-STUDIO-WEBSITE-HANDOFF.md).
+A point-and-click tour of Ember Studio’s office, presented through a northern magic-school fantasy. The rooms represent real studio functions: planning, project records, development, QA and community. The approved interaction and visual contract is in [DESIGN.md](DESIGN.md).
 
-## Preview locally
+The concept decision and compatibility notes are recorded in [docs/CONCEPT-HISTORY.md](docs/CONCEPT-HISTORY.md).
 
-Open `index.html` directly, or from this folder run:
+## Preview
+
+From the repository root:
 
 ```sh
 python -m http.server 4173
 ```
 
-Visit http://localhost:4173. No installation, build step or JavaScript runtime is required by the site.
+Visit http://localhost:4173. Serve through HTTP because the interactive site uses native JavaScript modules. No package installation or build step is required.
 
-## Pages and editing
+## Editing
 
-- `index.html`: Entrance, works preview, college introduction and Doors.
-- `works.html`: Golem Sculptor and Monstel, both in development.
-- `college.html`: Studio, six staff portraits and roles, tools and Doors.
-- `assets/site.css`: shared responsive styles and locked color tokens.
-- `DESIGN.md`: design decisions, components and accessibility constraints.
-- `assets/logo.png`, `assets/banner.png`, `assets/staff/*.png`: supplied originals, preserved. The banner is not loaded on any page.
-- `assets/staff/*.webp`: optimized delivery images; `pixie.webp` is generated. Portrait source/prompt details are in `docs/ASSETS.md`.
+- `index.html`: accessible application shell, entrance and native dialogs.
+- `assets/college.js`: five rooms, staff placement/conversations, rune and tool responses, remembered room and sound setting.
+- `assets/college.css`: palette, typography, reusable controls, scene composition, responsive layouts and reduced motion.
+- `assets/book.js`: two-page desktop / one-page mobile reader, page-turn animation, section bookmarks and per-book reading position.
+- `assets/project-records.js`: Golem Sculptor and Monstel introduction and development notes. Sources: [PROJECT-SOURCES.md](docs/PROJECT-SOURCES.md).
+- `assets/sound.js`: opt-in WAV loops from `assets/audio/`, outdoor wind and interaction sounds; music lowers during book reading and suspends when the tab is hidden.
+- `assets/language.js`, `assets/locale.js`: English default, saved Korean switch and authored Korean interface/book copy.
+- `assets/scenes/`, `assets/characters/`: optimized local artwork. Sources and generation details: [ASSETS.md](docs/ASSETS.md).
+- `works.html`, `college.html`: existing URLs enter the library and hall; their HTML remains a readable fallback when JavaScript is disabled.
 
-Navigation and footers are plain HTML on each page; update all three when changing shared copy or links.
-
-## GitHub Pages
-
-Serve the **repository root `/` from `main`** (Settings → Pages → Deploy from a branch → main → /(root)). This is the existing repository setting, verified during implementation. `.nojekyll` keeps the site a plain static publish.
-
-Public URL: https://notnull92.github.io/
-
-A feature branch or PR is not the public deployment. Merge to `main` to publish; no custom domain is configured by this change.
+Language, motion, room and book position use browser local storage. Sound starts muted unless a saved opt-in is resumed by a user interaction. Blocked storage never prevents exploration.
 
 ## Validate
 
 ```sh
 node scripts/check.mjs
+node scripts/book-check.mjs
+node scripts/sound-check.mjs
 ```
 
-This dependency-free check verifies page structure, local asset/anchor references, exact social URLs, works and staff. Browser and Lighthouse results are recorded in [the validation report](docs/VALIDATION.md).
+Browser verification and limitations are recorded in [VALIDATION.md](docs/VALIDATION.md). The previous static site's Lighthouse scores do not describe this redesign.
+
+## Publishing
+
+GitHub Pages serves the repository root from `main` at https://notnull92.github.io/. The current work remains on the feature branch until integrated into `main`; local implementation is not a production deployment.

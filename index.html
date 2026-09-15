@@ -1,158 +1,50 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ember Studio — Games that glow</title>
-<meta name="description" content="Small games made with care. Explore Golem Sculptor and Monstel, meet Ember Studio, and follow the work as it takes shape.">
-<meta name="theme-color" content="#0B0E14">
-<link rel="canonical" href="https://notnull92.github.io/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ember Studio — Games that glow">
-<meta property="og:description" content="Small games made with care. Explore Golem Sculptor and Monstel, meet Ember Studio, and follow the work as it takes shape.">
-<meta property="og:url" content="https://notnull92.github.io/">
-<meta property="og:image" content="https://notnull92.github.io/assets/logo.png">
-<link rel="icon" href="assets/favicon.png" type="image/png">
-<link rel="stylesheet" href="assets/site.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Studio — The Living Studio</title>
+<meta name="description" content="Step inside Ember Studio. Discover small games, turn the pages of their development, and meet the people behind the work.">
+<meta name="theme-color" content="#0B0E14"><link rel="canonical" href="https://notnull92.github.io/">
+<meta property="og:type" content="website"><meta property="og:title" content="Ember Studio — Games that glow"><meta property="og:description" content="A small studio of curious game makers. Explore our games and the stories behind them."><meta property="og:url" content="https://notnull92.github.io/"><meta property="og:image" content="https://notnull92.github.io/assets/logo.png">
+<link rel="icon" href="assets/favicon.png"><link rel="preload" as="image" href="assets/scenes/entrance.webp" fetchpriority="high"><link rel="stylesheet" href="assets/college.css">
+<script type="module" src="assets/college.js"></script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="site-header">
-<div class="wrap nav-row">
-<a class="brand" href="./">Ember Studio<small>THE NORTHERN LEDGER</small>
-</a>
-<nav aria-label="Main navigation">
-<a href="./" aria-current="page">Entrance</a>
-<a href="works.html">Works</a>
-<a href="college.html">College</a>
-<a href="./#doors">Doors</a>
+<a class="skip" href="#main">Skip to the studio</a>
+<header class="world-header">
+<a class="wordmark" href="#entrance" aria-label="Ember Studio entrance"><img src="assets/logo.png" width="52" height="52" alt=""><span>EMBER STUDIO<small>A STUDIO OF CURIOUS MAKERS</small></span></a>
+<nav class="quick-nav" aria-label="Studio spaces">
+<a href="#hall" data-room="hall"><span aria-hidden="true">I</span> Studio Hall</a>
+<a href="#library" data-room="library"><span aria-hidden="true">II</span> Project Archive</a>
+<a href="#workshop" data-room="workshop"><span aria-hidden="true">III</span> Dev Workshop</a>
+<a href="#doors" data-room="doors"><span aria-hidden="true">IV</span> The Doors</a>
 </nav>
-</div>
+<div class="header-controls"><button class="control language-toggle" data-language translate="no" lang="ko" aria-label="Switch to Korean">한국어</button><button class="sound-toggle control" id="sound-toggle" aria-pressed="false" title="Enable ambient sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"/></svg><span>Sound off</span></button></div>
 </header>
-<main id="main" tabindex="-1" class="wrap">
-<section class="hero" aria-labelledby="hero-title">
-<div>
-<p class="chapter meta">
-<span>I</span>
-<span>Entrance</span>
-</p>
-<h1 id="hero-title">Games that glow after the screen fades.</h1>
-<p class="intro">Ember Studio catalogues small games made with care — drafts on the shelf, warmth that stays. Follow the work as it takes shape.</p>
-<div class="actions">
-<a class="button primary" href="https://discord.gg/VkAFZHyUn">Enter Discord <span aria-hidden="true">↗</span>
-</a>
-<a class="button" href="works.html">Browse works <span aria-hidden="true">→</span>
-</a>
+<main id="main" tabindex="-1">
+<section class="scene" id="scene" data-room="entrance" aria-labelledby="room-title">
+<img class="scene-art" id="scene-art" src="assets/scenes/entrance.webp" width="1536" height="1024" fetchpriority="high" alt="Ember Studio’s frost-covered northern office overlooking the sea at twilight">
+<div class="scene-weather" aria-hidden="true"></div>
+<button class="control motion-toggle" id="motion-toggle" aria-pressed="false">Pause animation</button>
+<div class="scene-shade" aria-hidden="true"></div>
+<div class="scene-foreground" id="scene-foreground">
+<div class="entrance-copy">
+<p class="eyebrow"><span class="tiny-star" aria-hidden="true">✦</span> EMBER STUDIO / THE NORTHERN OFFICE</p>
+<img class="hero-logo" src="assets/logo.png" alt="Ember Studio" width="488" height="488">
+<h1 id="room-title">Games that glow<br>after the screen fades.</h1>
+<p class="intro">Small games. Curious minds.<br>A little warmth, long after you leave.</p>
+<div class="entrance-actions"><a class="primary-action" href="#hall">Enter the studio <span aria-hidden="true">→</span></a></div>
 </div>
+<a class="entrance-door scene-link" href="#hall"><span class="hotspot-dot" aria-hidden="true"></span><span>THE STUDIO HALL <b aria-hidden="true">↗</b></span></a>
 </div>
-<div class="archive-plate">
-<img class="logo" src="assets/logo.png" alt="Ember Studio pixel flame logo" width="488" height="488" fetchpriority="high">
-<p class="plate-label meta">SMALL GAMES. LASTING LIGHT.</p>
-</div>
+<div class="scene-corner corner-top" aria-hidden="true"></div><div class="scene-corner corner-bottom" aria-hidden="true"></div>
+<div class="room-coordinate" id="room-coordinate" aria-hidden="true">01 / THE STUDIO APPROACH</div>
 </section>
-<section class="section" aria-labelledby="works-title">
-<div class="section-head">
-<div>
-<p class="chapter meta">
-<span>II</span>
-<span>The collection</span>
-</p>
-<h2 id="works-title">Works on the shelf</h2>
-</div>
-<a class="text-link" href="works.html">Browse the collection <span aria-hidden="true">→</span>
-</a>
-</div>
-<div class="shelves">
-<article class="shelf">
-<div class="shelf-top">
-<span class="meta">WORK / 01</span>
-<span class="status">In development</span>
-</div>
-<h3>Golem Sculptor</h3>
-<p>A siege board of stone and runes — still being carved.</p>
-<a class="text-link" href="works.html#work-01">View the record <span aria-hidden="true">→</span>
-</a>
-</article>
-<article class="shelf">
-<div class="shelf-top">
-<span class="meta">WORK / 02</span>
-<span class="status">In development</span>
-</div>
-<h3>Monstel</h3>
-<p>A monster-hotel elevator loop — floors rising in development.</p>
-<a class="text-link" href="works.html#work-02">View the record <span aria-hidden="true">→</span>
-</a>
-</article>
-</div>
-</section>
-<section class="section college-strip" aria-labelledby="college-title">
-<div>
-<p class="chapter meta">
-<span>III</span>
-<span>The college</span>
-</p>
-<h2 id="college-title">Made with care.<br>Kept with you.</h2>
-</div>
-<div>
-<p>Ember Studio is a small northern workshop. We build games that leave a glow after the screen goes dark.</p>
-<a class="text-link" href="college.html">Meet the studio <span aria-hidden="true">→</span>
-</a>
-</div>
-</section>
-<section class="section doors" id="doors" aria-labelledby="doors-title">
-<div>
-<p class="chapter meta">
-<span>IV</span>
-<span>Doors out</span>
-</p>
-<h2 id="doors-title">The record continues.</h2>
-<p class="intro" style="margin-top:var(--s6);color:var(--frost)">Follow a draft. Share a thought.<br>There is room for another reader.</p>
-</div>
-<div class="door-list">
-<a class="door" href="https://discord.gg/VkAFZHyUn">
-<span>
-<strong>Discord</strong>
-<small>Join the conversation</small>
-</span>
-<span aria-hidden="true">↗</span>
-</a>
-<a class="door" href="https://www.youtube.com/@emberstudioo">
-<span>
-<strong>YouTube</strong>
-<small>Watch the work take shape</small>
-</span>
-<span aria-hidden="true">↗</span>
-</a>
-<a class="door" href="https://www.threads.com/@emberstudio26">
-<span>
-<strong>Threads</strong>
-<small>Notes from the studio</small>
-</span>
-<span aria-hidden="true">↗</span>
-</a>
-<a class="door" href="https://github.com/NotNull92">
-<span>
-<strong>GitHub</strong>
-<small>Explore the source</small>
-</span>
-<span aria-hidden="true">↗</span>
-</a>
-</div>
-</section>
+<div class="room-ledger" id="room-ledger"><p><span class="ledger-dot" aria-hidden="true"></span> A light is still on. Come inside.</p><a href="https://discord.gg/VkAFZHyUn">Join our Discord <span aria-hidden="true">↗</span></a></div>
 </main>
-<footer class="site-footer">
-<div class="wrap footer-row">
-<div>
-<p class="whisper">games that stay after the screen goes dark</p>
-<p class="copyright">© 2026 Ember Studio</p>
-</div>
-<div class="footer-links" aria-label="Studio links">
-<a href="https://discord.gg/VkAFZHyUn">Discord</a>
-<a href="https://www.youtube.com/@emberstudioo">YouTube</a>
-<a href="https://www.threads.com/@emberstudio26">Threads</a>
-<a href="https://github.com/NotNull92">GitHub</a>
-</div>
-</div>
-</footer>
-</body>
-</html>
+<footer class="world-footer"><span>© 2026 EMBER STUDIO</span><p id="wayfinding">Choose a doorway. Follow your curiosity.</p><a href="#entrance">Return to the bridge <span aria-hidden="true">↗</span></a></footer>
+<dialog id="book-dialog" aria-labelledby="book-title"></dialog>
+<dialog id="staff-dialog" aria-labelledby="staff-name"><div class="conversation"><button class="control language-toggle conversation-language" data-language translate="no" lang="ko" aria-label="Switch to Korean">한국어</button><button class="icon-button conversation-close" data-close-dialog aria-label="Close conversation">×</button><div class="conversation-portrait"><img id="staff-portrait" width="480" height="480" alt=""></div><div class="conversation-content"><p class="eyebrow" id="staff-role"></p><h2 id="staff-name"></h2><p class="conversation-line" id="staff-line" aria-live="polite"></p><div class="conversation-options" id="staff-options"></div></div></div></dialog>
+<div id="notice" class="notice" role="status" aria-live="polite"></div>
+<noscript><section class="noscript-records"><h2>The studio records</h2><p>Explore our games and meet the studio.</p><a href="works.html">Our works</a><a href="college.html">Meet the studio</a><a href="https://discord.gg/VkAFZHyUn">Discord</a></section></noscript>
+</body></html>

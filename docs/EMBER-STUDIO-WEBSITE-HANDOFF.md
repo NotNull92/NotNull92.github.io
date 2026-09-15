@@ -1,5 +1,7 @@
 # Ember Studio official website — unified handoff (design + implementation)
 
+> Historical document. The 2026-09-15 clarification in [CONCEPT-HISTORY.md](CONCEPT-HISTORY.md) supersedes every passage that treats Ember Studio itself as a college or its visitors as apprentice scholars. The current site is an Ember Studio office tour presented through a northern magic-school fantasy.
+
 **For:** Codex Astra (`gpt-6-astra`, effort medium)  
 **Repo:** https://github.com/NotNull92/NotNull92.github.io  
 **Public URL:** https://notnull92.github.io (unless custom domain later)  
