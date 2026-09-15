@@ -16,7 +16,7 @@
 - Keyboard: Tab reveals skip link; Enter focuses main; primary action focus is visible. Navigation exercised through Works, College and Doors. Default, hover, keyboard focus and pointer-pressed primary action inspected.
 - Pressed label uses black on the locked deep ember color to meet AA; default body and secondary text meet AA on their respective surfaces.
 - External HTTP checks: Discord, YouTube, Threads and GitHub returned 200. Login/join flows were not submitted.
-- `git diff --check`: pass.
+- `git diff HEAD^ HEAD --check -- . ":(exclude)docs/EMBER-STUDIO-WEBSITE-HANDOFF.md"`: implementation passes. The supplied handoff retains its existing Markdown hard-break spaces; the whole-commit whitespace check reports those spaces.
 
 ## Lighthouse
 
