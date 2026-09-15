@@ -46,6 +46,7 @@ function books() { return `<div class="library-books">${projects.map(project => 
 let roomId = 'entrance';
 let noticeTimer;
 let staffOpener;
+let conversationRequest = 0;
 function showNotice(message) { clearTimeout(noticeTimer); notice.textContent = message; notice.classList.add('visible'); localize(notice); noticeTimer = setTimeout(() => { notice.classList.remove('visible'); notice.textContent = ''; }, 3600); }
 function updateArt() {
   art.src = `assets/scenes/${roomId === 'entrance' && mobile.matches ? 'entrance-mobile' : roomId}.webp`;
@@ -54,6 +55,7 @@ function updateArt() {
 }
 function renderRoom(next, focus = false) {
   if (!Object.hasOwn(rooms, next)) return;
+  conversationRequest++;
   reader.close();
   if (staffDialog.open) staffDialog.close();
   roomId = next;
@@ -85,11 +87,17 @@ function renderRoom(next, focus = false) {
   localize();
   if (focus) { document.querySelector('#room-title').setAttribute('tabindex', '-1'); document.querySelector('#room-title').focus({ preventScroll: true }); sound.effect('door'); }
 }
-function openConversation(id) {
+async function openConversation(id) {
   const person = staff[id];
   if (!person) return;
+  const request = ++conversationRequest;
+  const portraitSource = `assets/characters/${id}-portrait.webp`;
+  const portraitImage = new Image();
+  portraitImage.src = portraitSource;
+  try { await portraitImage.decode(); } catch { /* The dialogue can still show its text if an image fails. */ }
+  if (request !== conversationRequest) return;
   staffOpener = document.activeElement;
-  document.querySelector('#staff-portrait').src = `assets/characters/${id}-portrait.webp`;
+  document.querySelector('#staff-portrait').src = portraitSource;
   document.querySelector('#staff-portrait').alt = `${person.name}, ${person.role}`;
   document.querySelector('#staff-role').textContent = person.role;
   document.querySelector('#staff-name').textContent = person.name;

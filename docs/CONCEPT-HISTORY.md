@@ -35,3 +35,7 @@ The filenames college.html, assets/college.js and assets/college.css, the Colleg
 ### Authority
 
 This decision supersedes earlier documents that describe Ember Studio itself as a college, academy or group of apprentice scholars. Those documents remain historical records. Future copy should pass this test: a visitor may see a magical school, but should understand that they are touring an indie game studio office and meeting its working team.
+
+## 2026-09-15 — Staff portrait transition
+
+The shared staff dialog now waits for the selected portrait to decode before it opens. This prevents the previous staff member's portrait from appearing briefly while the new image loads. A request counter also discards an outdated portrait load when the visitor changes rooms or makes a newer selection first.
