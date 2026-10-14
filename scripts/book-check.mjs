@@ -38,4 +38,76 @@ for (const project of projects) {
     assert.ok(words >= 30 && words <= 70, `${project.id}/${page.title}: ${words} body words`);
   }
 }
-console.log('Book checks passed: every leaf reachable, exact indices preserved, boundaries and content fit.');
+// Exercise the real turn path: reuse the outgoing page and never wait to show content.
+const previousDocument = globalThis.document;
+try {
+  for (const { wide, from, to, allowed, hidden } of [
+    { wide: true, from: 0, to: 2, allowed: true, hidden: false },
+    { wide: true, from: 4, to: 2, allowed: true, hidden: false },
+    { wide: false, from: 0, to: 1, allowed: true, hidden: false },
+    { wide: false, from: 2, to: 1, allowed: true, hidden: false },
+    { wide: true, from: 0, to: 2, allowed: false, hidden: false },
+    { wide: true, from: 0, to: 2, allowed: true, hidden: true }
+  ]) {
+    globalThis.document = { hidden };
+    const events = [];
+    let finish;
+    let removed = 0;
+    let frames;
+    let options;
+    const scroll = { scrollTop: from === 0 ? 120 : 0 };
+    const originalScrollTop = scroll.scrollTop;
+    const animation = {
+      finished: new Promise(resolve => { finish = resolve; }),
+      cancel() { events.push('cancel'); }
+    };
+    const leaf = {
+      style: {}, classList: { add() {} }, setAttribute() {},
+      querySelector() { return scroll; },
+      remove() { removed++; },
+      animate(keyframes, settings) {
+        events.push('animate'); frames = keyframes; options = settings;
+        return animation;
+      }
+    };
+    const reader = {
+      project: projects[0], index: from, wide: { matches: wide }, turn: null,
+      canTurn: () => allowed,
+      spread: {
+        querySelector(selector) {
+          assert.equal(selector, to > from && wide ? '.right-page' : '.left-page');
+          return leaf;
+        },
+        append(node) { assert.equal(node, leaf, 'reuse the outgoing node, do not clone it'); }
+      },
+      render() { assert.equal(this.index, to); scroll.scrollTop = 0; events.push('render'); },
+      onEffect() { events.push('effect'); },
+      stopTurn: BookReader.prototype.stopTurn
+    };
+    BookReader.prototype.goTo.call(reader, to);
+    assert.deepEqual(events.slice(0, 2), ['render', 'effect']);
+    if (!allowed || hidden) {
+      assert.equal(reader.turn, null);
+      assert.equal(frames, undefined, 'paused/hidden readers render without a decorative turn');
+      continue;
+    }
+    assert.equal(reader.turn.leaf, leaf);
+    assert.equal(scroll.scrollTop, originalScrollTop, 'the outgoing leaf must retain its reading position');
+    assert.equal(leaf.inert, true);
+    assert.equal(leaf.style.width, wide ? '50%' : '100%');
+    assert.equal(leaf.style.transformOrigin, to > from ? 'left center' : 'right center');
+    for (const frame of frames) {
+      assert.deepEqual(Object.keys(frame).sort(), ['opacity', 'transform']);
+      assert.ok(!frame.transform.includes('perspective'), 'the spread already supplies perspective');
+    }
+    assert.equal(options.duration, 320);
+    finish();
+    await animation.finished;
+    assert.equal(reader.turn, null);
+    assert.equal(removed, 1, 'finished turns remove only the decorative page');
+  }
+} finally {
+  if (previousDocument === undefined) delete globalThis.document;
+  else globalThis.document = previousDocument;
+}
+console.log('Book checks passed: page reachability, indices, lightweight turns, pause and cleanup.');

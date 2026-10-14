@@ -21,7 +21,19 @@ Local Silkscreen display at24–48px, exterior title32–60px, -0.03em tracking.
 Scene (changing/settled), hotspot (button or link with plaque, hover/focus/pressed), staff (transparent sprite, shadow/nameplate, focus/talking), project record (DOM book cover/spine, section selection, native dialog leaves and controls), dialogue (native dialog portrait/name/role/greeting/action choices), studio seal/tool (short action response+polite status), sound toggle, contextual room ledger. All repeated elements share tokens and styles. Escape closes; focus restored. Page index announced. First/last controls disabled correctly. Resize preserves exact reading position. Legacy Works/Studio pages retain readable fallback and direct interactive links.
 
 ## 6. Motion
-Feedback160ms, selection320ms, page turn520ms, scene entrance800ms, ease cubic-bezier(.22,1,.36,1). Transform/opacity only; no scroll hijack. Page rotation around spine via temporary leaf, content never waits for animation events. Modal scales from center, nearest beui center-morph mechanism. No new motion dependency. Novel rune has three segments align on click; tool marks last1.2s. Reduced motion removes transforms; invisible page pauses animation. Audio explicit opt-in, remembered setting, user gesture unlock, hidden tab suspends; room-specific filtered wind/soft tones, short procedural effects, no voice.
+Feedback `--fast` 160ms, dialog enter `--enter` 220ms, selection/room crossfade `--select` 320ms, page turn `--turn` 520ms, first scene entrance `--arrival` 800ms, ease `cubic-bezier(.22,1,.36,1)`. Transform/opacity only; no scroll hijack. Page rotation around spine via temporary leaf, content never waits for animation events. Modal scales from center. No new motion dependency.
+
+A header motion control is available in every room. `ember-motion-paused` is the site choice and survives room changes. First visit follows OS `prefers-reduced-motion`. Explicit Play re-enables decorative motion; a later OS reduce pauses immediately and is stored; returning to no-preference does not override a manual pause. Pause, hidden tabs and open book/conversation dialogs stop environment loops and cancel one-shot WAAPI/leaves; content, notices, focus and navigation stay usable. Motion pause is independent of sound.
+
+Room changes crossfade the background in 320ms with a single temporary image layer. Rapid navigation keeps the last room; stale image completion is ignored. Entering a room clears the previous notice, rune timers, tool decorations and fade layer.
+
+The hall seal aligns its three fragments on a short stagger, then a thin wave and a few rising ember pixels; repeats cancel the previous timeout. Mora’s console settles three lines, Star’s notes show a check, Pixie’s sketch gathers four palette pixels. Hall/workshop lamps and library dust are local, low-amplitude loops on the current room only.
+
+Reduced motion removes transforms; paused or reduced input still shows the completed seal/tool state and readable notice. Invisible pages pause animation. Audio explicit opt-in, remembered setting, user gesture unlock, hidden tab suspends; room-specific filtered wind/soft tones, short procedural effects, no voice.
+
+## 2026-09-16 motion / game-feel revision
+
+Implemented from `docs/GROK-MOTION-IMPLEMENTATION-HANDOFF.md`. Times above are the values used after on-screen adjustment: room crossfade 320ms, dialog 220ms, rune fragments 280ms with 50ms stagger, sparks 300–650ms, tool reactions 400–600ms, candle cycles 4.8–6.6s, library dust 12–18s. Particle counts: hall 4 lamps, workshop 3 lamps, library 2 lamps plus 8 dust motes (5 below 700px). No motion library was added.
 
 ## 7. Materials and assets
 Original generated pixel exterior/hall/library/workshop/doors, supplied logo, six pixel sprites/portraits from original identities. New assets/staff/픽시.png replaces earlier temporary Pixie as reference. Sprite alpha preserved. Compressed WebP delivery. Book covers are symbolic geometric art, not fabricated game screenshots. Provenance in docs/ASSETS.md.

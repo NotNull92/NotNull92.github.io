@@ -19,13 +19,14 @@
 <a href="#workshop" data-room="workshop"><span aria-hidden="true">III</span> Dev Workshop</a>
 <a href="#doors" data-room="doors"><span aria-hidden="true">IV</span> The Doors</a>
 </nav>
-<div class="header-controls"><button class="control language-toggle" data-language translate="no" lang="ko" aria-label="Switch to Korean">한국어</button><button class="sound-toggle control" id="sound-toggle" aria-pressed="false" title="Enable ambient sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"/></svg><span>Sound off</span></button></div>
+<div class="header-controls"><button class="control language-toggle" data-language translate="no" lang="ko" aria-label="Switch to Korean">한국어</button><button class="sound-toggle control" id="sound-toggle" aria-pressed="false" title="Enable ambient sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"/></svg><span>Sound off</span></button><button class="control motion-toggle" id="motion-toggle" aria-pressed="false" aria-label="Pause animation" title="Pause animation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7V5Zm7 0h3v14h-3V5Z"/></svg><span aria-hidden="true">Pause animation</span></button></div>
 </header>
 <main id="main" tabindex="-1">
 <section class="scene" id="scene" data-room="entrance" aria-labelledby="room-title">
 <img class="scene-art" id="scene-art" src="assets/scenes/entrance.webp" width="1536" height="1024" fetchpriority="high" alt="Ember Studio’s frost-covered northern office overlooking the sea at twilight">
+<img class="scene-art scene-art-fade" id="scene-art-fade" alt="" aria-hidden="true">
 <div class="scene-weather" aria-hidden="true"></div>
-<button class="control motion-toggle" id="motion-toggle" aria-pressed="false">Pause animation</button>
+<div class="scene-ambience" id="scene-ambience" aria-hidden="true"></div>
 <div class="scene-shade" aria-hidden="true"></div>
 <div class="scene-foreground" id="scene-foreground">
 <div class="entrance-copy">

@@ -82,3 +82,80 @@ Four revision-2 v4 score-data presets are in the maker folder (ember-presets). T
 - The authoritative rationale and future copy rule are in docs/CONCEPT-HISTORY.md; the older unified handoff is explicitly marked historical.
 - Automated checks passed: scripts/check.mjs, scripts/book-check.mjs, scripts/sound-check.mjs, JavaScript syntax checks and git diff whitespace validation.
 - Real Chrome verification passed in English and Korean for the entrance identity, navigation, Project Archive, Golem Sculptor project record, Development Workshop and longer Korean labels. The 1667px desktop capture showed no clipping or overlap from the revised copy. No new full viewport matrix was run because layout code did not change.
+
+## Motion / game-feel implementation — 2026-09-16
+
+Local implementation only. No commit, push, or public deployment. Baseline commit `e791393`. Existing working-tree WAV deletions were left in place.
+
+### Automated checks (this machine, Node v24.12.0)
+
+| Command | Result |
+| --- | --- |
+| `node scripts/check.mjs` | PASS |
+| `node scripts/book-check.mjs` | PASS |
+| `node scripts/motion-check.mjs` | PASS — stale request tokens lose; paused page turns skip the decorative leaf; repeated rune tokens keep the latest |
+| `node --check assets/college.js` / `book.js` / `sound.js` | PASS |
+| `git diff --check` | PASS aside from the existing LF/CRLF notice |
+| `node scripts/sound-check.mjs` | FAIL — ENOENT on the four deleted `assets/audio/*.wav` files, then `sound.musicReady` assertion. Not weakened. |
+
+### Chrome (headless, HTTP `http://127.0.0.1:4173`)
+
+Served from the existing local preview. Screenshots and a JSON report: `.omo/evidence/motion-juice/` (gitignored). Viewports 1280, 768 and 375 for all five rooms. `prefers-reduced-motion: no-preference` was emulated for the motion-on pass after an initial run showed headless Chrome defaulting to reduce.
+
+Observed in DOM and screenshots:
+
+- Header motion control visible in every room; icon-only so 768px no longer overlaps the wordmark. Two-row header from 900px down.
+- Hall 4 lamps, workshop 3, library 2 lamps + 8 dust (5 on 375px). No page overflow at 1280/768/375.
+- Background room id, hash and title matched after sequential and rapid hash changes. Last room won. Fade layer count 0 after settle.
+- Rune click: aligned `.active`, 4 sparks, wave, readable notice. Ten repeats kept one spark node. Pause: aligned state + notice, 0 sparks. Play again: sparks and wave return.
+- Build/test/pixels produced distinct decorations (3 lines / 1 check / 4 palette pixels). Leaving the workshop after a tool click cleared decorations and the previous notice.
+- Golem record opened to pages 1–2; Next reached 3–4 with a turning leaf while motion allowed. Dust `animation-play-state` was `paused` while the dialog was open.
+- Julie conversation opened with her portrait and greeting; the work question replaced the whole line immediately.
+- Korean switch kept the hall, translated the motion label to `움직임 멈추기`.
+- Mobile: motion button in the header, entrance door hotspot hidden as before, first-tap tools still fire.
+
+### Limits
+
+- Indoor BGM, reading ducking and hidden-tab audio were not listened to or marked passing: the four WAV files are still missing locally. `sound-check.mjs` remains FAIL for that reason.
+- No Lighthouse, FPS counter, or screen-reader session. Smoothness is a visual observation on this machine, not a 60fps guarantee.
+- OS Settings UI for reduced motion was not clicked in a full desktop Chrome window; headless emulation plus the in-page pause control were used.
+- Official external destinations were not signed into. Link URLs are unchanged.
+- Historical PASS rows above are not this revision.
+
+## WAV restore — 2026-09-16
+
+The four tracked indoor loops are back in `assets/audio/` and match the previously connected sizes. `node scripts/sound-check.mjs` now PASSES (hall 75.79s, library 90.00s, workshop 60.00s, doors 82.29s; loop seams, levels, mute, visibility, late loads, retry). `check.mjs`, `book-check.mjs` and `motion-check.mjs` still PASS.
+
+Chrome at `http://127.0.0.1:4173` fetched all four files with HTTP 200. Clicking Sound produced `Sound on` and no error notice; hall → library → workshop → doors → entrance → library left no load warning; Golem record opened while sound stayed on; mute returned `aria-pressed=false`. Evidence: `.omo/evidence/audio-restore/report.json`. This is graph/UI verification, not a listening session.
+
+Removed leftover untracked `assets/audio/8bit_workshop_70s.wav`. It was not in the music handoff. The Development Workshop still uses `8bit_magicSchool_edit_60s.wav`. No commit or deploy.
+
+## Motion review fixes — 2026-09-17
+
+Addressed `docs/GROK-MOTION-REVIEW.md` without adding effects or libraries. `check.mjs`, `book-check.mjs`, `motion-check.mjs` (now includes same-path art-gate) and `sound-check.mjs` PASS. Chrome at `http://127.0.0.1:8765` with `prefers-reduced-motion: no-preference` reproduced the four review cases after the patch:
+
+- Library transition interrupted by 768→375: fade inactive, `data-scene` is library.webp.
+- Workshop build then test: 0 leftover `.tool-fx` after 1.1s.
+- Site Pause: staff dialog and book spread `animation-name: none`.
+- Entrance `Enter the studio` focus: hearth `animation: none`, opacity 0.95.
+
+Evidence: `.omo/evidence/motion-review/report.json`. Full 15-room matrix, listening, FPS and OS Settings UI were not rerun. No commit or deploy.
+
+## Motion review, remaining Pause paths — 2026-09-17
+
+Second-review leftovers: Pause `transition:none` is on the elements themselves, not only `:hover`/`:focus-visible`. `.book-ribbon`, `.notice`, and `.talk-symbol` no longer travel while paused. Chrome `prefers-reduced-motion: no-preference` at `http://127.0.0.1:8765`:
+
+- Pause + library book hover/unhover: ribbon `transition 0s`, transform `none`; cover stays on its rest rotation.
+- Pause + Pixie tool notice: visible immediately, transform `y:0`, `transition 0s`.
+- Pause + hall actor hover/unhover: talk-symbol opacity 1 then 0, `y:0`, `transition 0s`.
+- Play: ribbon `transition 0.2s`, hover `y ≈ -38`.
+
+`check.mjs` and `motion-check.mjs` PASS. No commit or deploy.
+
+## Page-turn scrollbar fix — 2026-09-17
+
+- The perspective-transformed temporary leaf was contributing overflow outside the book to the dialog's scroll area. In the Korean desktop Golem 5–6 → 3–4 turn, a 653px-tall dialog reached scrollHeight 1283px and its client width dropped from 1120 to 1105px as scrollbars appeared; horizontal overflow also appeared.
+- Added `overflow:clip` to `.book-spread`. The decorative turn is bounded by the book, while the book retains natural content height and the outer dialog retains `overflow:auto` for long pages. No page-turn logic, timing, or content changed.
+- Real Chrome over local HTTP, motion enabled: sampled Golem Korean forward/backward turns at 1680×1013 (45/55 DOM observations) and Monstel English forward/backward at 1280×900 (45/45). During the sampled active turns, dialog scrollWidth/clientWidth and scrollHeight/clientHeight were equal, with clientWidth remaining 1120px. The temporary leaf was removed after completion.
+- At 375×700, Korean single-page turning had no horizontal overflow and a stable scrollHeight during the sampled turn. The longer page retained vertical reading scroll: clientHeight 665px, scrollHeight 721px, End scrolled to 56px and exposed the footer/navigation. Content was not clipped by disabling dialog scrolling.
+- `node scripts/check.mjs`, `node scripts/book-check.mjs`, `node scripts/motion-check.mjs`, and `git diff --check` passed. DOM sampling is not an FPS measurement. Browser language and temporary viewport were restored. No commit, push, or deployment.
