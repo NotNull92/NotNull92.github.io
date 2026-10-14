@@ -1,0 +1,32 @@
+body {
+  max-width: 48rem;
+  margin-inline: auto;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  line-height: 1.85;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.legal-header { padding-bottom: 1.5rem; border-bottom: 1px solid var(--stone); }
+nav a { text-decoration: underline; }
+main { padding-block: 2rem; }
+h1, h2 { font-family: inherit; font-weight: 700; line-height: 1.5; }
+h1 { font-size: clamp(1.6rem, 5vw, 2.25rem); margin-bottom: 1.5rem; }
+h2 { font-size: 1.25rem; margin-top: 2.5rem; }
+p { max-width: none; }
+blockquote {
+  margin: 0 0 2rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--ember);
+  background: var(--bg-hall);
+}
+ul { padding-left: 1.4rem; margin-block: .75rem 1.5rem; }
+li + li { margin-top: .75rem; }
+main > p:last-child { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--stone); }
+main a { color: var(--ember); }
+@media print {
+  body { max-width: none; padding: 0; background: white; color: black; }
+  .legal-header, .skip { display: none; }
+  blockquote { background: none; border-color: black; }
+  main a { color: inherit; }
+}
