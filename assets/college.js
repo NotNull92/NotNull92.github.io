@@ -34,10 +34,11 @@ const staff = {
   jenny: { name: 'Jenny', role: 'Marketing', room: 'doors', greeting: 'Heading out? Take a little of the warmth with you. I can point you toward our latest work and conversations.', detail: 'I help our games find their people. Small updates, honest stories, and a place to talk about what comes next.' }
 };
 const destinations = [
-  ['Discord', 'Join the conversation', 'https://discord.gg/VkAFZHyUn', 'M4 5h16v12H9l-5 4V5Zm4 5h1m3 0h1m3 0h1'],
+  ['Discord', 'Join the conversation', 'https://discord.gg/APnfmbZKk', 'M4 5h16v12H9l-5 4V5Zm4 5h1m3 0h1m3 0h1'],
   ['YouTube', 'Watch the work', 'https://www.youtube.com/@emberstudioo', 'M4 5h16v14H4V5Zm6 4 6 3-6 3V9Z'],
   ['Threads', 'Notes from the studio', 'https://www.threads.com/@emberstudio26', 'M17 7c-6-6-15 0-11 10 2 5 12 5 13-1 1-6-10-8-10-3 0 5 7 3 7-2 0-3-2-4-5-3'],
-  ['GitHub', 'Look under the hood', 'https://github.com/NotNull92', 'm8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18']
+  ['GitHub', 'Look under the hood', 'https://github.com/NotNull92', 'm8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18'],
+  ['Ko-fi', 'Support our work', 'https://ko-fi.com/notnull92', 'M3 7h14v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V7Zm14 1h2a3 3 0 0 1 0 6h-2M7 3v2m5-2v2']
 ];
 const traces = {
   pixels: 'Pixie leaves three tiny colour studies in the margin.',
@@ -229,7 +230,7 @@ function renderRoom(next, focus = false) {
   document.querySelectorAll('.quick-nav a').forEach(link => {
     if (link.dataset.room === next) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');
   });
-  ledger.innerHTML = `<p><span class="ledger-dot" aria-hidden="true"></span>${room.hint}</p><div class="ledger-links">${room.staff.map(id => `<button data-staff="${id}">Talk to ${staff[id].name}</button>`).join('')}${next === 'entrance' ? '<a href="https://discord.gg/VkAFZHyUn">Join our Discord ↗</a>' : ''}</div>`;
+  ledger.innerHTML = `<p><span class="ledger-dot" aria-hidden="true"></span>${room.hint}</p><div class="ledger-links">${room.staff.map(id => `<button data-staff="${id}">Talk to ${staff[id].name}</button>`).join('')}${next === 'entrance' ? '<a href="https://discord.gg/APnfmbZKk">Join our Discord ↗</a>' : ''}</div>`;
   document.querySelector('#wayfinding').textContent = next === 'entrance' ? 'Choose a doorway. Follow your curiosity.' : 'We’ll remember where you were working.';
   document.title = next === 'entrance' ? 'Ember Studio — The Living Studio' : `${room.title} — Ember Studio`;
   remember('ember-room', next);

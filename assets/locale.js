@@ -49,6 +49,7 @@ export const translations = {
   "Join the conversation": "이야기 나누기",
   "Watch the work": "영상으로 만나기",
   "Notes from the studio": "스튜디오의 짧은 기록",
+  "Support our work": "개발 후원하기",
   "Look under the hood": "코드 들여다보기",
   "Close conversation": "대화 닫기",
   "What are you working on?": "어떤 일을 하고 계세요?",

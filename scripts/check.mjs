@@ -9,7 +9,7 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const read = name => fs.readFileSync(path.join(root, name), 'utf8');
 const app = read('assets/college.js');
 const rooms = ['entrance', 'hall', 'library', 'workshop', 'doors'];
-const social = ['https://discord.gg/VkAFZHyUn', 'https://www.youtube.com/@emberstudioo', 'https://www.threads.com/@emberstudio26', 'https://github.com/NotNull92'];
+const social = ['https://discord.gg/APnfmbZKk', 'https://www.youtube.com/@emberstudioo', 'https://www.threads.com/@emberstudio26', 'https://github.com/NotNull92', 'https://ko-fi.com/notnull92'];
 for (const name of ['index.html', 'works.html', 'college.html']) {
   const html = read(name);
   assert.equal((html.match(/<h1(?:\s[^>]*)?>/g) || []).length, 1, `${name}: one H1`);

@@ -65,7 +65,7 @@ export const projects = [
         ],
         diagram: null,
         note: 'In development',
-        links: [{ label: 'Visit the studio community', href: 'https://discord.gg/VkAFZHyUn' }]
+        links: [{ label: 'Visit the studio community', href: 'https://discord.gg/APnfmbZKk' }]
       }
     ]
   },
@@ -135,7 +135,7 @@ export const projects = [
         ],
         diagram: null,
         note: 'In development',
-        links: [{ label: 'Visit the studio community', href: 'https://discord.gg/VkAFZHyUn' }]
+        links: [{ label: 'Visit the studio community', href: 'https://discord.gg/APnfmbZKk' }]
       }
     ]
   }
