@@ -219,7 +219,7 @@ function renderRoom(next, focus = false) {
     if (next === 'hall') content += actor('julie', 22, 12, 23) + actor('bara', 78, 12, 78) + path('library', 50, 34, 30) + path('workshop', 86, 32, 76) + `<button class="rune-control" aria-label="Align the studio seal"><span class="rune" aria-hidden="true"><i></i><i></i><i></i></span><span class="rune-label">CHECK THE STUDIO SEAL</span></button>`;
     if (next === 'library') content += books() + actor('pixie', 85, 10) + tool('pixels', 'Pixie’s concept sketch', 73, 35, 8, 39);
     if (next === 'workshop') content += actor('mora', 28, 12, 24) + actor('star', 72, 12, 77) + tool('build', 'Mora’s build console', 13, 34, 8, 37) + tool('test', 'Star’s QA notes', 71, 34, 55, 37);
-    if (next === 'doors') content += `<div class="portal-row">${destinations.map(([name, detail, href, icon]) => `<a class="outbound-portal" href="${href}"><span class="portal-glyph">${glyph(icon)}</span><strong>${name} ↗</strong><small>${detail}</small></a>`).join('')}</div>` + actor('jenny', 91, 5);
+    if (next === 'doors') content += `<div class="portal-row">${destinations.map(([name, detail, href, icon]) => `<a class="outbound-portal${name === 'Ko-fi' ? ' support-portal' : ''}" href="${href}"><span class="portal-glyph">${glyph(icon)}</span><strong>${name === 'Ko-fi' ? 'Support the studio' : name} ↗</strong><small>${name === 'Ko-fi' ? 'Ko-fi' : detail}</small></a>`).join('')}</div>` + actor('jenny', 91, 5);
   }
   foreground.innerHTML = content;
   renderAmbience();
