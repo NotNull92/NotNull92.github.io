@@ -40,4 +40,4 @@ Browser verification and limitations are recorded in [VALIDATION.md](docs/VALIDA
 
 ## Publishing
 
-GitHub Pages serves the repository root from `main` at https://notnull92.github.io/. The current work remains on the feature branch until integrated into `main`; local implementation is not a production deployment.
+GitHub Pages serves the repository root from `main` at https://emberstudio.monster/. The current work remains on the feature branch until integrated into `main`; local implementation is not a production deployment.
